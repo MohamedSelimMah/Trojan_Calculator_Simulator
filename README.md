@@ -1,6 +1,6 @@
 # Trojan Calculator Simulator (GUI) - Educational Tool v1.0
 
-**Author**: ZeroOne  
+**Author**: MohamedSelim
 **GitHub**: [ZeroOne](https://github.com/ZeroOne)  
 **License**: [MIT](LICENSE)  
 
