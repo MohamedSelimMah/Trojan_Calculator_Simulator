@@ -1,7 +1,7 @@
 # Trojan Calculator Simulator (GUI) - Educational Tool v1.0
 
 **Author**: MohamedSelim  
-**GitHub**: [ZeroOne](https://github.com/ZeroOne)  
+**GitHub**: [ZeroOne](https://github.com/MohamedSelimMah)  
 **License**: [MIT](LICENSE)  
 
 ![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)  
@@ -80,7 +80,7 @@ git clone https://github.com/ZeroOne/TrojanCalculatorSimulator.git
 cd TrojanCalculatorSimulator
 
 # Run with Python
-python3 trojan_calculator_gui.py
+python3 trojan_calculator_simulator.py
 ```
 
 **Requirements**:  
