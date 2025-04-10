@@ -55,19 +55,6 @@
 4. **Visual Feedback**  
    - Results displayed in green (valid) / red (error)
 
-### Background Simulation
-```python
-# Sample simulation code (v1)
-def create_simulated_file():
-    filename = f"simulated_activity/{time.time()}_log.simulated_trojan"
-    content = f"SIMULATED ACTIVITY @ {time.ctime()}\nFake data: {random.randint(0,1000)}"
-    with open(filename, "w") as f:
-        f.write(content)
-```
-- Creates timestamped text files
-- Generates random "fake data" entries
-- Automatic cleanup option available
-
 ---
 
 ## 🚀 Installation
