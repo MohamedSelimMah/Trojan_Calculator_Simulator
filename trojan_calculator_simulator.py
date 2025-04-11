@@ -30,6 +30,7 @@ def perform_calculation():
 def Payload():
     with open("fake_file.txt","w") as fake_file:
         fake_file.write("this is a fake file created by the trojan simulator .")
+    print("Done")
 
 
 
