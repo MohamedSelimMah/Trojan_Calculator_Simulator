@@ -53,7 +53,6 @@
 4. **Visual Feedback**  
    - Results displayed in the console 
 
-<<<<<<< HEAD
 ### Background Simulation
 ```python
 # Sample simulation code (v1)
@@ -65,8 +64,6 @@ def Payload():
 ```
 - Create file "fake_file" 
 - Write in the file a message
-
-=======
 ---
 
 ## 🚀 Installation
