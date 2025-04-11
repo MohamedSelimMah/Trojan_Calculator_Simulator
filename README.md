@@ -32,8 +32,6 @@
 - 🕵️ **Stealth Mode**: Creates harmless `.simulated_trojan` files after each calculation
 - 📁 **File Simulation**:
   - Generates fake logs with random data
-  - Uses system timestamps for realism
-  - Stores files in isolated `/simulated_activity` directory
 - 🔍 **Transparent Process**: Status messages show simulation details
 
 ### Educational Value
@@ -55,6 +53,21 @@
 4. **Visual Feedback**  
    - Results displayed in green (valid) / red (error)
 
+<<<<<<< HEAD
+### Background Simulation
+```python
+# Sample simulation code (v1)
+
+def Payload():
+    with open("fake_file.txt","w") as fake_file:
+        fake_file.write("this is a fake file created by the trojan simulator .")
+
+```
+- Create file "fake_file" 
+- Write in the file a message
+
+=======
+>>>>>>> origin/master
 ---
 
 ## 🚀 Installation
@@ -85,6 +98,8 @@ python3 trojan_calculator_simulator.py
 
 ### Planned Upgrades (v1.5-v2.0)
 ```diff
++ Uses system timestamps for realism
++ Stores files in isolated directory
 + Advanced simulation features
 + Multi-platform support
 + Interactive tutorial mode
@@ -96,9 +111,7 @@ python3 trojan_calculator_simulator.py
 
 ## 💡 Educational Scenarios
 
-1. **Demo 1**: Perform calculation → Check `/simulated_activity` folder
-2. **Demo 2**: Trigger input error → Observe security warning
-3. **Demo 3**: Monitor system resources during operation
+1. **Demo 1**: Perform calculation → Create fake file
 
 ---
 
