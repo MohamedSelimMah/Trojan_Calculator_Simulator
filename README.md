@@ -29,7 +29,7 @@
   - Empty fields
 
 ### Trojan Simulation
-- 🕵️ **Stealth Mode**: Creates harmless `.simulated_trojan` files after each calculation
+- 🕵️ **Stealth Mode**: Creates harmless `fake_file` files after each calculation
 - 📁 **File Simulation**:
   - Generates fake logs with random data
 - 🔍 **Transparent Process**: Status messages show simulation details
