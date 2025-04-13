@@ -1,6 +1,3 @@
-Here’s the updated README with your request to mention the addition of a keylogger in the next version:
-
----
 
 # Trojan Calculator Simulator (GUI) - Educational Tool v1.5
 
