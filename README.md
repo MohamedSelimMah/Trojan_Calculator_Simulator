@@ -1,4 +1,3 @@
-
 # Trojan Calculator Simulator (GUI) - Educational Tool v1.5
 
 **Author**: MohamedSelim  
