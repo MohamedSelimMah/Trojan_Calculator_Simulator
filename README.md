@@ -5,8 +5,6 @@
 **License**: [MIT](LICENSE)  
 
 ![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)  
-*"Understanding malware through safe simulation"*
-
 ---
 
 ## 📖 Overview
