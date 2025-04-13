@@ -1,4 +1,8 @@
-# Trojan Calculator Simulator (GUI) - Educational Tool v1.0
+Here’s the updated README with your request to mention the addition of a keylogger in the next version:
+
+---
+
+# Trojan Calculator Simulator (GUI) - Educational Tool v1.5
 
 **Author**: MohamedSelim  
 **GitHub**: [ZeroOne](https://github.com/MohamedSelimMah)  
@@ -11,14 +15,14 @@
 
 ## 📖 Overview
 
-**Trojan Calculator Simulator v1.0** is an interactive educational tool that demonstrates Trojan horse principles through a functional GUI calculator. This version focuses on basic arithmetic operations paired with simulated benign malicious activity, providing a risk-free environment to learn cybersecurity fundamentals.
+**Trojan Calculator Simulator v1.5** is an enhanced version of the interactive educational tool that demonstrates Trojan horse principles through a functional GUI calculator. This version introduces more realistic "malicious" behavior simulations, such as file persistence and reboot detection, offering a better learning experience for cybersecurity fundamentals.
 
 **Disclaimer**:  
 ⚠️ **This is a controlled simulation** containing zero actual malicious code. All "malicious" actions are fake file operations that leave your system completely unharmed.
 
 ---
 
-## 🎯 Key Features (v1.0)
+## 🎯 Key Features (v1.5)
 
 ### Calculator Core
 - **Basic Operations**: Addition, Subtraction, Multiplication, Division
@@ -29,10 +33,11 @@
   - Empty fields
 
 ### Trojan Simulation
-- 🕵️ **Stealth Mode**: Creates harmless `fake_file` files after each calculation
-- 📁 **File Simulation**:
-  - Generates fake logs with random data
-- 🔍 **Transparent Process**: Status messages show simulation details
+- 🕵️ **Stealth Mode**: Creates harmless `fake_file.txt` after each calculation
+- 🔍 **Persistence Simulation**: Logs simulated persistence actions, mimicking a Trojan's behavior of adding itself to system startup
+- 🚨 **Reboot Detection**: Logs when the system is simulated to restart (using a fake "restart_simu.txt" marker file)
+- 📝 **Transparent Process**: Status messages show simulation details
+- 📜 **Persistence Logs**: Log files track the simulated persistence and restart actions
 
 ### Educational Value
 - 🧠 **Interactive Learning**: Real-time comparison between user actions and background simulation
@@ -49,21 +54,45 @@
 2. **Operation Selection**  
    - Choose from +, -, *, / via dropdown
 3. **Calculation**  
-   - Click "Calculate" to get result
+   - Click "Calculate" to get the result
 4. **Visual Feedback**  
-   - Results displayed in the console 
+   - Results displayed in the console
 
 ### Background Simulation
 ```python
-# Sample simulation code (v1)
+# Sample simulation code (v1.5)
 
 def Payload():
-    with open("fake_file.txt","w") as fake_file:
-        fake_file.write("this is a fake file created by the trojan simulator .")
+    with open("fake_file.txt", "w") as fake_file:
+        fake_file.write("This is a fake file created by the Trojan simulator.")
     print("Done")
+    simulate_pres()
+
+def simulate_pres():
+    timestamp = time.strftime("%Y%m%d%H%M%S")
+    with open("persistence_log.txt", "a") as log:
+        log.write("\n[Simulated Persistence Triggered]\n")
+        log.write("Pretending to add this program to system start.\n")
+        log.write(f"Timestamp: {timestamp}\n")
+
+def check_restart():
+    timestamp = time.strftime("%Y%m%d%H%M%S")
+    if os.path.exists("restart_simu.txt"):
+        with open("persistence_log.txt", "a") as log:
+            log.write("\n[Restart Detected]\n")
+            log.write(f"Timestamp: {timestamp}\n")
+    else:
+        with open("persistence_log.txt", "a") as log:
+            log.write("\n[First time restart]\n")
+            log.write(f"Timestamp: {timestamp}\n")
+
+    with open("restart_simu.txt", "w") as f:
+        f.write("Simulated reboot marker")
 ```
-- Create file "fake_file" 
-- Write in the file a message
+- Creates a fake file `fake_file.txt` after each calculation.
+- Simulates persistence by logging system start-up behavior.
+- Detects simulated system restarts and logs them in `persistence_log.txt`.
+
 ---
 
 ## 🚀 Installation
@@ -87,20 +116,17 @@ python3 trojan_calculator_simulator.py
 
 ## 📜 Version Information
 
-### v1.0 Release Notes
-- Initial release with core functionality
-- Basic file simulation engine
-- Fundamental GUI layout
+### v1.5 Release Notes
+- **Persistence Simulation**: Simulates adding the program to system startup with logging
+- **Reboot Detection**: Detects and logs simulated system restart actions
+- **Enhanced File Operations**: Creates additional log files for better tracking
+- **Improved User Interface**: Refined error handling and feedback mechanisms
 
-### Planned Upgrades (v1.5-v2.0)
+### Planned Upgrades (v2.0)
 ```diff
-+ Uses system timestamps for realism
-+ Stores files in isolated directory
-+ Advanced simulation features
++ Addition of keylogger simulation for educational purposes
 + Multi-platform support
-+ Interactive tutorial mode
 + Historical activity viewer
-+ Localization support
 ```
 
 ---
@@ -108,6 +134,8 @@ python3 trojan_calculator_simulator.py
 ## 💡 Educational Scenarios
 
 1. **Demo 1**: Perform calculation → Create fake file
+2. **Demo 2**: Simulate persistence by logging to `persistence_log.txt`
+3. **Demo 3**: Simulate system restart detection and logging
 
 ---
 
@@ -142,5 +170,8 @@ We welcome contributions! Please follow our [Contribution Guidelines](CONTRIBUTI
 
 ---
 
-*Version 1.0 - Designed with ❤️ for the cybersecurity community*  
+*Version 1.5 - Designed with ❤️ for the cybersecurity community*  
 *"Knowledge is the best antivirus"* 🔐
+
+---
+

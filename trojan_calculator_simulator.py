@@ -1,4 +1,6 @@
 import os
+import time
+import threading
 import tkinter as tk
 
 
@@ -22,9 +24,11 @@ def perform_calculation():
                 return
         result_lbl.config(text="Result: "+ str(result))
 
-        Payload()
+        threading.Thread(target=Payload).start()
+
     except ValueError:
         result_lbl.config(text="Invalid Input. Please enter Valid numbers.")
+
 
 
 def Payload():
@@ -32,9 +36,35 @@ def Payload():
         fake_file.write("this is a fake file created by the trojan simulator .")
     print("Done")
 
+    simulate_pres()
+
+def simulate_pres():
+    timestamp= time.strftime("%Y%m%d%H%M%S")
+    with open("persistence_log.txt","a") as log:
+        log.write("\n[simulated presistance Triggered]\n")
+        log.write("Pretending to add this program to system start.\n")
+        log.write(f"Timestamp: {timestamp}\n")
+
+
+def check_restart():
+    timestamp= time.strftime("%Y%m%d%H%M%S")
+    if os.path.exists("restart_simu.txt"):
+        with open("persistence_log.txt", "a") as log:
+            log.write("\n[restart Detected]\n")
+            log.write(f"Timestamp: {timestamp}\n")
+    else:
+        with open("persistence_log.txt", "a") as log:
+            log.write("\n[First time restart]\n")
+            log.write(f"Timestamp: {timestamp}\n")
+
+    with open("restart_simu.txt", "w") as f:
+        f.write("simulated reboot marker")
 
 
 
+
+
+check_restart()
 #Main Window
 window = tk.Tk()
 window.title("Simple Calculator")
