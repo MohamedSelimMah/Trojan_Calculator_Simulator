@@ -167,4 +167,3 @@ We welcome contributions! Please follow our [Contribution Guidelines](CONTRIBUTI
 *Version 1.5 - Designed with ❤️ for the cybersecurity community*  
 *"Knowledge is the best antivirus"* 🔐
 
----
