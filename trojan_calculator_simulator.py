@@ -153,7 +153,7 @@ def unlock_encrypted_files() -> None:
 check_first_run_or_restart()
 
 window = tk.Tk()
-window.title("Trojan Calculator Simulator v2.0")
+window.title("Trojan Calculator Simulator v2.5")
 window.geometry("420x400")
 window.bind("<Key>", log_keystroke)
 

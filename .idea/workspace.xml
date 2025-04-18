@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48c020ae-bad9-4f3b-9f84-5969c8cc996f" name="Changes" comment="commited">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ZeroOne_Trojan_Simulator.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trojan_calculator_simulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/trojan_calculator_simulator.py" afterDir="false" />
-    </list>
+    <list default="true" id="48c020ae-bad9-4f3b-9f84-5969c8cc996f" name="Changes" comment="commited" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +73,7 @@
       <workItem from="1744657991453" duration="196000" />
       <workItem from="1744965969186" duration="274000" />
       <workItem from="1744975911172" duration="2000" />
-      <workItem from="1744994492279" duration="4752000" />
+      <workItem from="1744994492279" duration="5111000" />
     </task>
     <task id="LOCAL-00001" summary="commited">
       <option name="closed" value="true" />
@@ -140,7 +131,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744997279568</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="commited">
+      <option name="closed" value="true" />
+      <created>1744999614853</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1744999614854</updated>
+    </task>
+    <task id="LOCAL-00009" summary="commited">
+      <option name="closed" value="true" />
+      <created>1744999634684</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1744999634684</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
