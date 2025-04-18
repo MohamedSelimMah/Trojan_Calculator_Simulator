@@ -6,12 +6,10 @@ import logging
 import tkinter as tk
 from tkinter import simpledialog, messagebox, filedialog
 
-# === Configuration Constants ===
 FAKE_KEY = "letmein"
 LOCKED_FILES_LOG = "locked_files.txt"
 LOG_FILE = "trojan_simulator.log"
 
-# === Logging Setup ===
 logging.basicConfig(
     filename=LOG_FILE,
     level=logging.INFO,
@@ -19,7 +17,6 @@ logging.basicConfig(
 )
 
 
-# === Business Logic ===
 def perform_calculation() -> None:
     """Perform the arithmetic operation selected by the user."""
     try:
@@ -149,7 +146,6 @@ def unlock_encrypted_files() -> None:
     messagebox.showinfo("Files Unlocked", "All files have been unlocked.")
 
 
-# === GUI Setup ===
 check_first_run_or_restart()
 
 window = tk.Tk()
