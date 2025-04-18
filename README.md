@@ -1,7 +1,3 @@
-Here’s the updated README with your request to mention the addition of a keylogger in the next version:
-
----
-
 # Trojan Calculator Simulator (GUI) - Educational Tool v1.5
 
 **Author**: MohamedSelim  
@@ -9,8 +5,6 @@ Here’s the updated README with your request to mention the addition of a keylo
 **License**: [MIT](LICENSE)  
 
 ![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)  
-*"Understanding malware through safe simulation"*
-
 ---
 
 ## 📖 Overview
@@ -172,6 +166,3 @@ We welcome contributions! Please follow our [Contribution Guidelines](CONTRIBUTI
 
 *Version 1.5 - Designed with ❤️ for the cybersecurity community*  
 *"Knowledge is the best antivirus"* 🔐
-
----
-
