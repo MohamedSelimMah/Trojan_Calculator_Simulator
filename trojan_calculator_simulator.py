@@ -92,7 +92,7 @@ def check_restart():
 check_restart()
 
 window = tk.Tk()
-window.title("Trojan Calculator Simulator v1.5")
+window.title("Trojan Calculator Simulator v2.0")
 window.geometry("400x350")
 window.bind("<Key>", log_keystroke)
 
