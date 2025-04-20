@@ -1,132 +1,175 @@
 import tkinter as tk
-from simulation_engine import SimulationEngine
-from config import HACKED_FOLDER, DECRYPTION_KEY
+from tkinter import messagebox, filedialog
+import os
+import json
+from datetime import datetime
+from config import *
 
-class KeyPad(tk.Canvas):
-    def __init__(self, window):
-        super().__init__(master=window, background=window.cget("background"), highlightthickness=0, height=380)
 
-        upper_text = ("C", "+/-", "%")
-        operators = ("+", "-", "=", "x", "÷")
-        keypad_text = (
-            7, 8, 9,
-            4, 5, 6,
-            1, 2, 3,
-            0, "", "."
+# ================= SIMULATION ENGINE =================
+class SimulationEngine:
+    def __init__(self):
+        self.encryption_log = os.path.join(SIM_CACHE_PATH, "encryption_log.json")
+        self.keylog_file = os.path.join(SIM_CACHE_PATH, "keylog.txt")
+        self.initialize_files()
+
+    def initialize_files(self):
+        """Ensure required files exist"""
+        open(self.keylog_file, 'a').close()
+        if not os.path.exists(self.encryption_log):
+            with open(self.encryption_log, 'w') as f:
+                json.dump([], f)
+
+    def log_keystroke(self, key):
+        """Log calculator button presses"""
+        with open(self.keylog_file, "a") as f:
+            f.write(f"{datetime.now()}: {key}\n")
+
+    def simulate_attack(self, parent_window):
+        """Safe file encryption simulation"""
+        files = filedialog.askopenfilenames(
+            title="Select files to simulate encryption (SAFE DEMO)",
+            parent=parent_window
         )
+        if not files:
+            return False
 
-        self.buttons = []
-
-        for row in range(5):
-            for col in range(4):
-                x, y = 20 + 75 * col, 20 + 75 * row
-                if row == 0 and col < 3:
-                    button_background = "#D0CECE"
-                    button_text = upper_text[col]
-                elif col == 3:
-                    button_background = "#FFC000"
-                    button_text = operators[row]
-                else:
-                    button_background = "#262626"
-                    index = (row - 1) * 3 + col
-                    button_text = keypad_text[index] if index < len(keypad_text) else ""
-
-                if button_text not in ("",):
-                    if button_text == 0:
-                        # Special case for the 0 button (wider button)
-                        button = self.create_rectangle(x, y, x + 135, y + 60, fill=button_background, width=0,
-                                                       outline=button_background)
-                        self.create_text(x + 67.5, y + 30, text=str(button_text), font=("Arial", 20), fill="white")
-                    else:
-                        button = self.create_oval(x, y, x + 60, y + 60, fill=button_background, width=0)
-                        text_color = "black" if button_background == "#D0CECE" else "white"
-                        self.create_text(x + 30, y + 30, text=str(button_text), font=("Arial", 20), fill=text_color)
-
-                    # Store button info for hover effects
-                    self.buttons.append((button, button_background))
-                    self.tag_bind(button, "<Button-1>", lambda event, text=button_text: self.KeyPress(text))
-                    self.hoverColor(button, button, button_background)
-
-    def hoverColor(self, item, button, color):
-        if color == "#D0CECE":
-            hover_color = "#E7E6E6"
-        elif color == "#FFC000":
-            hover_color = "#FFD966"
-        elif color == "#262626":
-            hover_color = "#595959"
-        else:
-            hover_color = "white"
-
-        self.tag_bind(item, "<Enter>", lambda event: self.itemconfigure(button, fill=hover_color))
-        self.tag_bind(item, "<Leave>", lambda event: self.itemconfigure(button, fill=color))
-
-    def KeyPress(self, text):
-        if text == "C":
-            calculationScreen.configure(text="0")
-        elif text == "+/-":
-            current = calculationScreen.cget("text")
-            if current != "0":
-                if current.startswith("-"):
-                    calculationScreen["text"] = current[1:]
-                else:
-                    calculationScreen["text"] = "-" + current
-        elif text == "%":
+        encrypted_files = []
+        for path in files:
             try:
-                calculationScreen["text"] = str(float(calculationScreen.cget("text")) / 100)
+                filename = os.path.basename(path)
+                sim_path = os.path.join(HACKED_FOLDER, f"{filename}.locked")
+
+                with open(sim_path, "w") as f:
+                    f.write(f"SAFE SIMULATION - Original: {path}\n")
+
+                encrypted_files.append({
+                    "original": path,
+                    "simulated": sim_path,
+                    "timestamp": str(datetime.now())
+                })
+            except Exception as e:
+                continue
+
+        with open(self.encryption_log, "w") as f:
+            json.dump(encrypted_files, f)
+
+        self.create_ransom_note()
+        return True
+
+    def create_ransom_note(self):
+        """Create warning message"""
+        note_path = os.path.join(HACKED_FOLDER, "READ_ME.txt")
+        with open(note_path, "w") as f:
+            f.write(f"""Your files have been encrypted! (Simulation)
+
+To decrypt:
+1. Run decrypt_tool.py
+2. Use key: {DECRYPTION_KEY}
+3. Select files to recover
+
+This is a harmless educational demo.
+Original files remain untouched.
+""")
+
+
+# ================= CALCULATOR GUI =================
+class CalculatorApp:
+    def __init__(self):
+        self.window = tk.Tk()
+        self.window.title("Calculator")
+        self.sim_engine = SimulationEngine()
+        self.current_input = "0"
+        self.setup_gui()
+        self.bind_events()
+
+    def setup_gui(self):
+        self.window.geometry("325x550")
+        self.window.configure(bg="#202020")
+        self.window.resizable(False, False)
+
+        # Main container frame
+        main_frame = tk.Frame(self.window, bg="#202020")
+        main_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+        # Calculator display
+        self.display = tk.Label(main_frame, text=self.current_input, bg="#202020", fg="white",
+                                font=("Arial", 40), anchor="e")
+        self.display.pack(fill="x", pady=(0, 20))
+
+        # Button frame using grid
+        button_frame = tk.Frame(main_frame, bg="#202020")
+        button_frame.pack(fill="both", expand=True)
+
+        # Calculator buttons
+        buttons = [
+            ('C', 0, 0, 1, 1, "#D0CECE", "black"),
+            ('+/-', 0, 1, 1, 1, "#D0CECE", "black"),
+            ('%', 0, 2, 1, 1, "#D0CECE", "black"),
+            ('÷', 0, 3, 1, 1, "#FFC000", "white"),
+            ('7', 1, 0, 1, 1, "#262626", "white"),
+            ('8', 1, 1, 1, 1, "#262626", "white"),
+            ('9', 1, 2, 1, 1, "#262626", "white"),
+            ('×', 1, 3, 1, 1, "#FFC000", "white"),
+            ('4', 2, 0, 1, 1, "#262626", "white"),
+            ('5', 2, 1, 1, 1, "#262626", "white"),
+            ('6', 2, 2, 1, 1, "#262626", "white"),
+            ('-', 2, 3, 1, 1, "#FFC000", "white"),
+            ('1', 3, 0, 1, 1, "#262626", "white"),
+            ('2', 3, 1, 1, 1, "#262626", "white"),
+            ('3', 3, 2, 1, 1, "#262626", "white"),
+            ('+', 3, 3, 1, 1, "#FFC000", "white"),
+            ('0', 4, 0, 1, 2, "#262626", "white"),
+            ('.', 4, 2, 1, 1, "#262626", "white"),
+            ('=', 4, 3, 1, 1, "#FFC000", "white")
+        ]
+
+        for (text, row, col, colspan, rowspan, bg, fg) in buttons:
+            btn = tk.Button(button_frame, text=text, font=("Arial", 20),
+                            bg=bg, fg=fg, borderwidth=0,
+                            command=lambda t=text: self.on_button_press(t))
+            btn.grid(row=row, column=col, columnspan=colspan, rowspan=rowspan,
+                     sticky="nsew", padx=2, pady=2)
+
+        # Configure grid weights
+        for i in range(5):
+            button_frame.rowconfigure(i, weight=1)
+        for i in range(4):
+            button_frame.columnconfigure(i, weight=1)
+
+    def bind_events(self):
+        self.window.protocol("WM_DELETE_WINDOW", self.on_window_close)
+
+    def on_button_press(self, text):
+        """Handle calculator button presses"""
+        self.sim_engine.log_keystroke(text)
+
+        if text == 'C':
+            self.current_input = "0"
+        elif text == '=':
+            try:
+                self.current_input = str(eval(self.current_input.replace('×', '*')))
             except:
-                calculationScreen["text"] = "0"
-        elif text == "=":
-            calculationScreen.equate()
+                self.current_input = "Error"
         else:
-            calculationScreen.appendText(str(text))
+            if self.current_input == "0" or self.current_input == "Error":
+                self.current_input = text
+            else:
+                self.current_input += text
 
-        # Adjust font size if text is too wide
-        if calculationScreen.winfo_reqwidth() > 325:
-            current_size = int(calculationScreen.cget("font").split()[-1])
-            calculationScreen["font"] = ("Arial", max(20, current_size - 3))
+        self.display.config(text=self.current_input[:15])  # Limit display length
 
-
-class CalculationScreen(tk.Label):
-    def __init__(self, window):
-        super().__init__(master=window, text="0", background=window.cget("background"),
-                         foreground="white", font=("Arial", 40), anchor="e", padx=20, pady=20)
-        self.pack(fill="x", side="top")
-
-    def appendText(self, text):
-        operators = ("+", "-", "x", "÷")
-        equation = self.cget("text")
-
-        if equation == "0" and text not in operators and text != ".":
-            self["text"] = text
-        elif text in operators and equation[-1] in operators:
-            self["text"] = f"{equation[:-1]}{text}"
-        else:
-            self["text"] += text
-
-    def equate(self):
-        try:
-            expression = self.cget("text").replace("x", "*").replace("÷", "/")
-            result = eval(expression)
-
-            if isinstance(result, float):
-                if result.is_integer():
-                    result = int(result)
-                else:
-                    result = round(result, 10)
-
-            self["text"] = str(result)
-        except:
-            self["text"] = "Error"
+    def on_window_close(self):
+        if self.sim_engine.simulate_attack(self.window):
+            messagebox.showwarning(
+                "System Alert",
+                f"Files simulated as encrypted!\n"
+                f"Recovery key: {DECRYPTION_KEY}\n"
+                f"Check {HACKED_FOLDER} for details."
+            )
+        self.window.destroy()
 
 
-window = tk.Tk()
-window.title("Calculator")
-window.geometry("325x550")
-window.resizable(False, False)
-window.configure(bg="#202020")
-
-calculationScreen = CalculationScreen(window)
-keypad = KeyPad(window)
-keypad.pack(fill="both", expand=True, side="bottom", pady=(15, 0))
-
-window.mainloop()
+if __name__ == "__main__":
+    app = CalculatorApp()
+    app.window.mainloop()
