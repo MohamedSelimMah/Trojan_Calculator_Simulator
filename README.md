@@ -1,5 +1,4 @@
-
-# Trojan Calculator Simulator (GUI) - Educational Tool v2.5
+# Trojan Calculator Simulator (GUI) - Educational Tool v2.0
 
 **Author**: MohamedSelim  
 **GitHub**: [ZeroOne](https://github.com/MohamedSelimMah)  
@@ -10,37 +9,34 @@
 
 ## 📖 Overview
 
-**Trojan Calculator Simulator v2.5** is a fully interactive educational tool that demonstrates Trojan horse behavior in a safe, simulated GUI environment. Version 2.5 introduces simulated **file encryption/decryption**, an improved **keylogger**, and enhanced logging of fake persistence techniques.
+**Trojan Calculator Simulator v2.0** is a fully interactive educational tool that teaches Trojan horse behavior through a safe and controlled GUI environment. This simulator mimics "malicious" activities in a **non-destructive** way while providing real-time feedback through a calculator interface and simulation logs.
 
 **Disclaimer**:  
-⚠️ **This is a safe simulation only. No actual malicious behavior occurs.**  
-All effects are purely educational and non-destructive — no real files are harmed or accessed without user consent.
+⚠️ **This is a controlled simulation** containing zero actual malicious code. All "malicious" actions are fake file operations that leave your system completely unharmed.
 
 ---
 
-## 🎯 Key Features (v2.5)
+## 🎯 Key Features (v2.0)
 
 ### Calculator Core
 - ✅ **Basic Operations**: Addition, Subtraction, Multiplication, Division
-- 🖥️ **GUI Interface**: Built using Tkinter for intuitive interaction
+- 🖥️ **GUI Interface**: Built using Tkinter for an intuitive experience
 - 🚫 **Input Validation**: Handles:
-  - Invalid input
+  - Invalid numbers
   - Division by zero
-  - Empty fields
+  - Empty inputs
 
 ### Trojan Behavior Simulation
-- 🕵️ **Stealth Actions**: Creates harmless `fake_file.txt` after each calculation
+- 🕵️ **Stealth Actions**: Automatically creates harmless `fake_file.txt` after each calculation
 - 🔁 **Persistence Simulation**: Logs fake startup registration in `persistence_log.txt`
-- 🔄 **Reboot Detection**: Detects reruns using a marker file (`restart_simu.txt`)
-- 🔡 **Simulated Keylogger**: Captures typed keys in `keylog_sim.txt` while the GUI is active
-- 🔐 **File Locking Simulation** *(NEW!)*: Encodes selected files using Base64 (mimics ransomware)
-- 🔓 **File Unlocking** *(NEW!)*: Prompts for a fake decryption key to restore locked files
-- 📜 **Activity Logs**: All actions logged for user review
+- 🔄 **Reboot Detection**: Recognizes and logs simulated system restarts
+- 🔡 **Simulated Keylogger** *(NEW!)*: Logs keystrokes typed while the window is active into `keylog_sim.txt`
+- 📜 **Activity Logs**: Persistent files log all simulated behaviors
 
 ### Educational Value
-- 🎓 **Hands-on Learning**: See how Trojan behaviors might operate
-- 🔒 **Safe Sandbox**: All effects are local, visible, and reversible
-- 💡 **Cyber Awareness**: Ideal for training sessions and ethical hacking education
+- 🎓 **Hands-on Learning**: Connects user actions to behind-the-scenes behaviors in real-time
+- 🔒 **Safe Playground**: All actions are sandboxed and reversible
+- 💡 **Awareness-Oriented**: Reinforces knowledge of common Trojan techniques without harm
 
 ---
 
@@ -48,13 +44,11 @@ All effects are purely educational and non-destructive — no real files are har
 
 ### User Interaction
 1. Input two numbers.
-2. Select an operation (+, -, ×, ÷).
+2. Select operation (+, -, ×, ÷).
 3. Click **Calculate**.
-4. A fake payload is triggered: logs, fake files, keylogs, and more.
-5. Optionally, "lock" or "unlock" files using the file selector.
+4. View result and simulation logs.
 
 ### Simulation Flow
-
 ```python
 def Payload():
     with open("fake_file.txt", "w") as fake_file:
@@ -71,32 +65,13 @@ def check_restart():
             log.write("\n[Restart Detected]\n")
     else:
         with open("persistence_log.txt", "a") as log:
-            log.write("\n[First Time Launch Detected]\n")
+            log.write("\n[First time restart]\n")
     with open("restart_simu.txt", "w") as f:
         f.write("Simulated reboot marker")
 
 def log_keystroke(event):
     with open("keylog_sim.txt", "a") as log:
         log.write(event.char)
-```
-
-Additional simulated functions include:
-
-```python
-def lock_file(file_path):
-    with open(file_path, "rb") as f:
-        encoded = base64.b64encode(f.read())
-    with open(file_path, "wb") as f:
-        f.write(encoded)
-
-def unlock_file(file_path, key):
-    if key == "letmein":
-        with open(file_path, "rb") as f:
-            decoded = base64.b64decode(f.read())
-        with open(file_path, "wb") as f:
-            f.write(decoded)
-    else:
-        print("Incorrect key. Simulated decryption failed.")
 ```
 
 ---
@@ -122,48 +97,55 @@ python3 trojan_calculator_simulator.py
 
 ## 📜 Version Information
 
-### v2.5 Highlights
-- 🔐 **File Encryption Simulation**: Base64 encodes selected files
-- 🔓 **File Decryption Simulation**: Unlocks files using a predefined fake key (`letmein`)
-- 🧠 **Keylogger Enhancements**: More responsive and logs all keystrokes in the active window
-- 📁 **Robust Persistence Simulation**: Smarter detection of simulated reboots
-- 🪟 **Improved GUI & UX**: Clean layout, better messaging, thread-safe updates
+### v2.0 Highlights
+- ✅ **Keylogger Simulation**: Keystrokes typed during GUI use are captured into a local log file
+- 🧠 **Educational Logging**: All simulated behaviors are clearly logged for review
+- 📁 **Persistence Simulation Improvements**
+- 🪟 **Improved GUI Experience**: Visual keylog feedback, better error messages
 
 ---
 
 ## 📌 Educational Scenarios
 
-Use the simulator to demonstrate common Trojan tactics in a controlled setting:
+Use the simulator in controlled environments to demonstrate:
 
-| Scenario                  | Simulated Behavior                                             |
-|---------------------------|----------------------------------------------------------------|
-| **Basic Calculation**     | Performs operation + drops fake file + logs persistence       |
-| **Key Press Simulation**  | Captures keystrokes to `keylog_sim.txt`                       |
-| **First Launch**          | Logs startup in `persistence_log.txt`                         |
-| **App Re-run**            | Logs a fake reboot using a marker file                        |
-| **File Locking**          | Encodes file content as if encrypted by ransomware            |
-| **File Unlocking**        | Requires fake key (`letmein`) to decode simulated file        |
+| Scenario                 | Behavior                                                    |
+|--------------------------|-------------------------------------------------------------|
+| **User Calculation**     | Performs operation + triggers fake file + logs persistence |
+| **Key Press Simulation** | Logs keystrokes as if captured by malware                  |
+| **First Run**            | Logs initial startup behavior                              |
+| **Re-run App**           | Detects & logs "reboot" via marker file                    |
 
 ---
 
 ## 🛑 Critical Reminder
 
-**This tool is strictly for**:  
+**This tool is only for**:  
 ✅ Education  
-✅ Ethical hacking workshops  
-✅ Cybersecurity awareness sessions  
+✅ Training environments  
+✅ Cybersecurity awareness  
 
-**Do NOT use for**:  
-❌ Real-world exploitation  
+**Do not use for**:  
+❌ Real malware creation  
 ❌ Penetration testing without consent  
-❌ Malware deployment or obfuscation  
+❌ Production systems  
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome!  
-You can help by:
+Feel free to fork the project, submit PRs, or open issues.
+
+Contribute by:
 - 🐛 Reporting bugs
-- 💡 Recommending improvements
-- 📖 Translating for non-English audiences
+- 🧠 Suggesting new educational features
+- ✨ Creating educational scenarios
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more info.
+
+---
+
+**Version 2.0 — Built for educators, learners, and curious minds**  
+_"Knowledge is the best antivirus."_ 🔐
+
+---
