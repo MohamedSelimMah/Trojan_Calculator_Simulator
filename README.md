@@ -2,7 +2,6 @@
 
 **Author**: MohamedSelim  
 **GitHub**: [ZeroOne](https://github.com/MohamedSelimMah)  
-**License**: []
 ![Python Version](https://img.shields.io/badge/Python-3.7%2B-blue)  
 ---
 
